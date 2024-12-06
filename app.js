@@ -58,6 +58,8 @@ const imagesLinkArray = [
     { id: "38", image: "./images/19.png", newAlt: "19" },
     { id: "39", image: "./images/20.png", newAlt: "20" },
     { id: "40", image: "./images/20.png", newAlt: "20" },
+    { id: "41", image: "./images/21.png", newAlt: "21" },
+    { id: "42", image: "./images/21.png", newAlt: "21" },
 ];
 
 // Get the start button and add an event listener
@@ -93,16 +95,16 @@ const setupGame = (difficulty) => {
     let pairsCount;
     switch (difficulty) {
         case 'easy':
-            pairsCount = 5; // 10 total cards
+            pairsCount = 6; // 10 total cards
             break;
         case 'normal':
-            pairsCount = 10; // 20 total cards
+            pairsCount = 12; // 20 total cards
             break;
         case 'hard':
-            pairsCount = 20; // 40 total cards
+            pairsCount = 21; // 40 total cards
             break;
         default:
-            pairsCount = 10; // Default to normal if something goes wrong
+            pairsCount = 6; // Default to normal if something goes wrong
     }
 
     // Select unique images based on pairsCount
