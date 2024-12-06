@@ -4,7 +4,7 @@
     align-items: center;
     height: 100vh;
     width: auto;
-    background-image: url("images/cover.png");
+    background-image: url("cover.png");
 }
 
 #difficulty-selection {

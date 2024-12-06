@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hololive Memory Game</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
+    <script defer src="/js/index1.js"></script> <!-- Link to your JavaScript file -->
+</head>
+<body>
+
+    <!-- Login Container -->
+    <div id="login-container">
+        <input type="text" id="username" placeholder="Enter your name" />
+        <button id="start-button">Start Game</button>
+    </div>
+
+    <!-- Difficulty Selection -->
+     <div id="containerWrapper">
+
+    <div id="difficulty-selection" style="display: none;">
+        <button id="easy-button">Easy</button>
+        <button id="normal-button">Normal</button>
+        <button id="hard-button">Hard</button>
+    </div>
+
+    <!-- Game Container -->
+    <div id="dynamic-cards" class="game-container" style="display: none;">
+        <div class="heading-container">
+            <h1 class="gfg-heading">Hololive Memory</h1>
+            <h2 class="game-heading">Play it, try it!</h2>
+        </div>
+
+        <div class="cards-container">
+            <!-- Card elements for 20 unique images -->
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="1" src="/css/images/1.png" alt="1" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="2" src="/css/images/1.png" alt="1" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="3" src="/css/images/2.png" alt="2" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="4" src="/css/images/2.png" alt="2" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="5" src="/css/images/3.png" alt="3" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="6" src="/css/images/3.png" alt="3" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="7" src="/css/images/4.png" alt="4" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="8" src="/css/images/4.png" alt="4" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="9" src="/css/images/5.png" alt="5" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="10" src="/css/images/5.png" alt="5" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="11" src="/css/images/6.png" alt="6" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="12" src="/css/images/6.png" alt="6" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="13" src="/css/images/7.png" alt="7" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="14" src="/css/images/7.png" alt="7" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="15" src="/css/images/8.png" alt="8" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="16" src="/css/images/8.png" alt="8" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="17" src="/css/images/9.png" alt="9" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="18" src="/css/images/9.png" alt="9" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="19" src="/css/images/10.png" alt="10" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="20" src="/css/images/10.png" alt="10" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="21" src="/css/images/11.png" alt="11" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="22" src="/css/images/11.png" alt="11" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="23" src="/css/images/12.png" alt="12" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="24" src="/css/images/12.png" alt="12" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="25" src="/css/images/13.png" alt="13" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="26" src="/css/images/13.png" alt="13" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="27" src="/css/images/14.png" alt="14" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="28" src="/css/images/14.png" alt="14" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="29" src="/css/images/15.png" alt="15" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="30" src="/css/images/15.png" alt="15" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="31" src="/css/images/16.png" alt="16" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="32" src="/css/images/16.png" alt="16" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="33" src="/css/images/17.png" alt="17" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="34" src="/css/images/17.png" alt="17" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="35" src="/css/images/18.png" alt="18" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="36" src="/css/images/18.png" alt="18" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="37" src="/css/images/19.png" alt="19" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="38" src="/css/images/19.png" alt="19" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="39" src="/css/images/20.png" alt="20" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="40" src="/css/images/20.png" alt="20" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="41" src="/css/images/21.png" alt="21" class="card-image">
+            </div>
+            <div class="card">
+                <img src="/css/images/icon.png" class="outline-image" alt="Card Outline">
+                <img id="42" src="/css/images/21.png" alt="21" class="card-image">
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="move-counter">Moves: 0</div>
+            <button id="restart" class="restart-button">Restart Game</button>
+        </div>
+    </div>
+</div>
+    <!-- Rankings Container -->
+    <div id="ranking-container" style="display: none;">
+        <h2>Rankings</h2>
+        <ul id="ranking-list"></ul>
+    </div>
+
+    <script src="/js/index1.js"></script>
+</body>
+</html>
