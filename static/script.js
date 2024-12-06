@@ -111,7 +111,11 @@ const setupGame = (difficulty) => {
     // Select unique images based on pairsCount
     const uniqueImages = [...new Set(imagesLinkArray.map(img => img.image))]; // Get unique images
     selectedImages = uniqueImages.slice(0, pairsCount).flatMap(img => [{ image: img }, { image: img }]); // Create pairs
-    selectedImages.sort(() => Math.random() - 0.5); // Shuffle images
+    for (let i = selectedImages.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [selectedImages[i], selectedImages[j]] = [selectedImages[j], selectedImages[i]]; // Swap elements
+    }
+    
 
     // Setup the cards with the selected images
     for (let i = 0; i < cards.length; i++) {
