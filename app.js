@@ -105,9 +105,9 @@ const setupGame = (difficulty) => {
             pairsCount = 10; // Default to normal if something goes wrong
     }
 
-    // Ensure unique images are selected
-    const uniqueImages = imagesLinkArray.slice(0, pairsCount).map(img => ({ ...img })); // Clone objects for safety
-    const selectedImages = uniqueImages.flatMap(img => [img, img]); // Duplicate for pairs
+    // Select unique images based on pairsCount
+    const uniqueImages = [...new Set(imagesLinkArray.map(img => img.image))]; // Get unique images
+    const selectedImages = uniqueImages.slice(0, pairsCount).flatMap(img => [{ image: img }, { image: img }]); // Create pairs
     selectedImages.sort(() => Math.random() - 0.5); // Shuffle images
 
     // Setup the cards with the selected images
@@ -115,7 +115,6 @@ const setupGame = (difficulty) => {
         if (i < selectedImages.length) {
             allImages[i].src = selectedImages[i].image;
             allImages[i].alt = selectedImages[i].newAlt;
-            allImages[i].id = selectedImages[i].id;
             cards[i].style.display = 'block'; // Show only the selected cards
         } else {
             cards[i].style.display = 'none'; // Hide extra cards
@@ -127,17 +126,23 @@ const setupGame = (difficulty) => {
 };
 
 const restartGame = () => {
+    // Reset card classes
     for (let card of cards) {
         card.classList.remove("toggled", "matched");
     }
+    
+    // Clear toggled cards array
     toggledCardsArray.length = 0;
+    
+    // Reset moves and win count
     move = 0;
     winCount = 0;
     movesDisplay.innerText = `Moves: ${move}`;
-    gameContainer.style.display = 'none'; // Hide game screen temporarily
-    gameContainer.style.display = 'block'; // Show the game screen again
-    setupGame(currentDifficulty); // Reinitialize the game setup
+
+    // Reinitialize the game setup
+    setupGame(currentDifficulty);
 };
+restart.addEventListener('click', restartGame);
 // Save user record
 const saveUserRecord = (moves, difficulty) => {
     userRecords[difficulty].push({ name: currentUser, moves: moves });
