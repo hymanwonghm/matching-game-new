@@ -69,7 +69,7 @@ startButton.addEventListener('click', () => {
     if (usernameInput) {
         currentUser = usernameInput; // Store the username
         document.getElementById('login-container').style.display = 'none';
-        document.getElementById('difficulty-selection').style.display = 'block'; // Show difficulty selection
+        document.getElementById('difficulty-selection').style.display = 'flex'; // Show difficulty selection
     } else {
         alert('Please enter your name.');
     }
@@ -77,7 +77,7 @@ startButton.addEventListener('click', () => {
 
 // Show login page
 const showLoginPage = () => {
-    loginContainer.style.display = 'block';
+    loginContainer.style.display = 'flex';
     gameContainer.style.display = 'none';
     rankingContainer.style.display = 'none';
 };
