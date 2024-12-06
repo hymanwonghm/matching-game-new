@@ -1,3 +1,5 @@
+
+
 const cards = document.getElementsByClassName('card');
 let allImages = document.getElementsByClassName('card-image');
 let movesDisplay = document.querySelector('.move-counter');
@@ -15,6 +17,7 @@ let userRecords = {
 };
 let currentUser = ''; // Store the current user's name
 let currentDifficulty = ''; // Store the current difficulty
+let selectedImages = []; // Keep track of selected images for matching
 
 // Full images link array
 const imagesLinkArray = [
@@ -95,21 +98,21 @@ const setupGame = (difficulty) => {
     let pairsCount;
     switch (difficulty) {
         case 'easy':
-            pairsCount = 6; // 10 total cards
+            pairsCount = 6; // 3 pairs (6 cards)
             break;
         case 'normal':
-            pairsCount = 12; // 20 total cards
+            pairsCount = 12; // 6 pairs (12 cards)
             break;
         case 'hard':
-            pairsCount = 21; // 40 total cards
+            pairsCount = 21; // 10 pairs (20 cards)
             break;
         default:
-            pairsCount = 6; // Default to normal if something goes wrong
+            pairsCount = 6; // Default to easy
     }
 
     // Select unique images based on pairsCount
     const uniqueImages = [...new Set(imagesLinkArray.map(img => img.image))]; // Get unique images
-    const selectedImages = uniqueImages.slice(0, pairsCount).flatMap(img => [{ image: img }, { image: img }]); // Create pairs
+    selectedImages = uniqueImages.slice(0, pairsCount).flatMap(img => [{ image: img }, { image: img }]); // Create pairs
     selectedImages.sort(() => Math.random() - 0.5); // Shuffle images
 
     // Setup the cards with the selected images
@@ -131,37 +134,57 @@ const restartGame = () => {
     // Reset card classes
     for (let card of cards) {
         card.classList.remove("toggled", "matched");
+        card.style.pointerEvents = 'auto'; // Enable clicks
     }
-    
+
     // Clear toggled cards array
     toggledCardsArray.length = 0;
-    
+
     // Reset moves and win count
     move = 0;
     winCount = 0;
     movesDisplay.innerText = `Moves: ${move}`;
-
-    // Reinitialize the game setup
-    setupGame(currentDifficulty);
 };
+
+// Add event listener to restart button
 restart.addEventListener('click', restartGame);
+
 // Save user record
-const saveUserRecord = (moves, difficulty) => {
-    userRecords[difficulty].push({ name: currentUser, moves: moves });
-    userRecords[difficulty].sort((a, b) => a.moves - b.moves); // Sort by moves (ascending)
-    displayRankings(difficulty); // Pass the difficulty to display rankings
+const saveUserRecord = async (moves, difficulty) => {
+    try {
+        // 將用戶記錄插入資料庫
+        await knex("rank").insert({ difficulty: difficulty, name: currentUser, mark: moves });
+
+        // 從資料庫獲取排名
+        const rankings = await knex("rank")
+            .where({ difficulty: difficulty }) // 正確的過濾語法
+            .orderBy('mark', 'asc'); // 按 moves 升序排列
+
+        // 更新前端顯示排名
+        displayRankings(rankings);
+    } catch (error) {
+        console.error("Error saving user record:", error);
+    }
 };
 
 // Display rankings
-const displayRankings = (difficulty) => {
+const displayRankings = (rankings) => {
     const rankingList = document.getElementById('ranking-list');
-    rankingList.innerHTML = ''; // Clear previous rankings
-    userRecords[difficulty].forEach(record => {
+    rankingList.innerHTML = ''; // 清空之前的排名
+
+    if (rankings.length === 0) {
         const li = document.createElement('li');
-        li.textContent = `${record.name}: ${record.moves} moves`;
+        li.textContent = 'No rankings available for this difficulty.';
         rankingList.appendChild(li);
-    });
-    rankingContainer.style.display = 'block';
+    } else {
+        rankings.forEach(record => {
+            const li = document.createElement('li');
+            li.textContent = `${record.name}: ${record.mark} moves`;
+            rankingList.appendChild(li);
+        });
+    }
+
+    rankingContainer.style.display = 'block'; // 顯示排名容器
 };
 
 // Event listeners for difficulty buttons
@@ -205,15 +228,24 @@ const handleCardClick = (card) => {
 
             if (firstCard.querySelector('.card-image').src === secondCard.querySelector('.card-image').src) {
                 winCount++;
-                firstCard.classList.add("matched"); // Mark as matched
-                secondCard.classList.add("matched"); // Mark as matched
+                firstCard.classList.add("matched");
+                secondCard.classList.add("matched");
                 toggledCardsArray = []; // Clear the array after a successful match
 
+                // Debugging: Check values
+                console.log(`Matched! Current winCount: ${winCount}`);
+                console.log(`Total pairs needed: ${selectedImages.length / 2}`);
+
                 // Check win condition
-                if (winCount === (imagesLinkArray.length / 2)) {
+                if (winCount === (selectedImages.length / 2)) {
                     setTimeout(() => {
                         alert(`Congratulations!!! You won the game in ${move} moves.`);
-                        saveUserRecord(move, currentDifficulty); // Pass the difficulty
+                        saveUserRecord(move, currentDifficulty); // Save the record
+
+                        // Disable all cards
+                        for (let card of cards) {
+                            card.style.pointerEvents = 'none'; // Disable clicks
+                        }
                     }, 300);
                 }
             } else {

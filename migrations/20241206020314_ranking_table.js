@@ -5,6 +5,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable("rank", (table) => {
     table.increments("id").primary();
+    table.text("difficulty").notNullable();
     table.text("name", 128).notNullable();
     table.integer("mark").notNullable();
     })
